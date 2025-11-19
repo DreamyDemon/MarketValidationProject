@@ -49,4 +49,22 @@ class InertiaController extends Controller
     public function RegisterPage(){
         return Inertia::render('RegisterPage');
     }
+    public function CheckoutSummaryPage(){
+        return Inertia::render('OtherPages/payment/CheckoutSummaryPage');
+    }
+    public function ForgotPasswordPage(){
+        return Inertia::render('OtherPages/account/ForgotPasswordPage');
+    }
+    public function CartPage(){
+        return Inertia::render('OtherPages/payment/CartPage');
+    }
+    public function CheckoutPage(){
+        return Inertia::render('OtherPages/payment/CheckoutPage');
+    }
+    public function BillPage(){
+        return Inertia::render('OtherPages/payment/BillPage');
+    }
+    public function MessagesPage(){
+        return Inertia::render('OtherPages/MessagesPage');
+    }
 }

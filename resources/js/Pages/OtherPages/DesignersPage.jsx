@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@heroui/button"
+import PortfolioModal from '@/components/PortfolioModal'
+import ChatWindow from '@/components/ChatWindow'
 
 // Sample designers data
 const designers = [
@@ -111,6 +113,9 @@ export default function DesignersPage() {
 
   const [selectedSpecialty, setSelectedSpecialty] = React.useState(getInitialSpecialty())
   const [searchTerm, setSearchTerm] = React.useState("")
+  const [portfolioOpen, setPortfolioOpen] = React.useState(false)
+  const [chatOpen, setChatOpen] = React.useState(false)
+  const [selectedDesigner, setSelectedDesigner] = React.useState(null)
 
   const filteredDesigners = designers.filter(designer => {
     const searchLower = searchTerm.toLowerCase()
@@ -276,11 +281,24 @@ export default function DesignersPage() {
                 </CardContent>
 
                 <CardFooter className="flex gap-2">
-                  <Button color="primary" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button 
+                    onClick={() => {
+                      setSelectedDesigner(designer)
+                      setPortfolioOpen(true)
+                    }}
+                    color="primary" 
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                  >
                     View Portfolio
                   </Button>
-                  <Button className="flex-1 bg-gray-700 hover:bg-gray-600 text-white border border-gray-600">
-                    Contact
+                  <Button 
+                    onClick={() => {
+                      setSelectedDesigner(designer)
+                      setChatOpen(true)
+                    }}
+                    className="flex-1 bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                  >
+                    Chat
                   </Button>
                 </CardFooter>
               </Card>
@@ -304,6 +322,18 @@ export default function DesignersPage() {
           )}
         </div>
       </div>
+      
+      <PortfolioModal 
+        isOpen={portfolioOpen} 
+        onClose={() => setPortfolioOpen(false)} 
+        product={selectedDesigner}
+      />
+      
+      <ChatWindow 
+        isOpen={chatOpen} 
+        onClose={() => setChatOpen(false)} 
+        designer={selectedDesigner}
+      />
       
       <Footer/>
     </div>
